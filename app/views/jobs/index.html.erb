@@ -1,0 +1,15 @@
+<div class="pull-right">
+  <%= link_to("ADD a job", new_job_path, :class => "btn btn-default")%>
+</div>
+<table class="table table-border">
+  <% @jobs.each do |j|%>
+    <tr>
+      <td><%= link_to(j.title, job_path(j))%></td>
+      <td>
+        <%= link_to("edit", edit_job_path(j))%>
+        <%= link_to("delete", job_path(j), :method => :delete, :data => "Are you sure?") %>
+      </td>
+      <td><%= j.created_at%></td>
+    </tr>
+  <% end %>
+</table>

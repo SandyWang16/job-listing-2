@@ -1,15 +1,39 @@
-<div class="pull-right">
-  <%= link_to("ADD a job", new_job_path, :class => "btn btn-default")%>
+<div class="dropdown clearfix pull-right">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      排序
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+        <li>
+          <%= link_to("按照薪资下限排序", jobs_path(:order => "by_lower_bound")) %>
+        </li>
+        <li>
+            <%= link_to("按照薪资上限排序", jobs_path(:order => "by_upper_bound")) %>
+
+        </li>
+        <li>
+          <%= link_to("按照发表时间排序", jobs_path ) %>
+
+        </li>
+    </ul>
 </div>
 <table class="table table-border">
+  <thead>
+    <tr>
+      <td>職缺</td>
+      <td>薪資下限</td>
+      <td>薪資上限</td>
+      <td>刊登時間</td>
+    </tr>
+  </thead>
+  <tbody>
   <% @jobs.each do |j|%>
     <tr>
       <td><%= link_to(j.title, job_path(j))%></td>
-      <td>
-        <%= link_to("edit", edit_job_path(j))%>
-        <%= link_to("delete", job_path(j), :method => :delete, :data => "Are you sure?") %>
-      </td>
+      <td><%= j.wage_lower_bound %></td>
+      <td><%= j.wage_upper_bound %></td>
       <td><%= j.created_at%></td>
     </tr>
   <% end %>
+  </tbody>
 </table>
